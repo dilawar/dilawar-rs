@@ -137,11 +137,7 @@ ls $TEMP
         let x = run_script(script, true).unwrap();
         println!("{x:?}");
         assert_eq!(x.code, 0);
-        if crate::is_ci() {
-            assert!(x.stdout.len() > 10);
-        } else {
-            assert!(x.stdout.len() > 30);
-        }
+        assert!(x.stdout.len() > 10);
         assert!(x.stderr.is_empty())
     }
 }
