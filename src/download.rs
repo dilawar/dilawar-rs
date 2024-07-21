@@ -17,13 +17,14 @@ pub fn download_url<U: reqwest::IntoUrl + std::fmt::Display>(
 
     // This will store the file in memory, shouldn't be a real concern since
     // it is only 15-20MB
-    let bytes = client
+    let resp = client
         .get(url)
         // The request gets rejected with no user-agent
         .header("User-Agent", "curl/8.1.2")
-        .send()?
-        .bytes()?;
+        .send()?;
+    let _ = resp.error_for_status_ref()?;
 
+    let bytes = resp.bytes()?;
     if let Some(sha256) = sha256 {
         let mut hasher = sha2::Sha256::new();
         hasher.update(&bytes);
