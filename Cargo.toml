@@ -1,0 +1,9 @@
+[package]
+name = "dilawar"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.86"
+ml-downloader = { git = "https://github.com/dilawar/ml-downloader", brach = "subcom" }
+tracing = "0.1.40"
